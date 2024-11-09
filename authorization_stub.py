@@ -15,16 +15,11 @@ dictConfig({
             'formatter': 'default',
             'class': 'logging.StreamHandler',
         },
-        'file': {
-            'formatter': 'default',
-            'class': 'logging.FileHandler',
-            'filename': 'authorization_stub.log',
-        },
     },
     'loggers': {
         'root': {
             'level': 'ERROR',
-            'handlers': ['stream', 'file']
+            'handlers': ['stream']
         },
         'waitress': {
             'level': 'INFO',
@@ -52,7 +47,7 @@ def login_get():
 def login_post():
     flash("Invalid username or password.", "error")
     app.logger.error('Detected an attempt to enter login and password [{0}] {1} {2}'.format(
-        request.remote_addr, request.form['username'], request.form['password']
+        request.headers.get("X-Real-Ip", request.remote_addr), request.form['username'], request.form['password']
     ))
 
     return redirect(url_for('login_get'))
