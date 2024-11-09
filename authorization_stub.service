@@ -6,6 +6,7 @@ After=network.target
 Type=simple
 User=www-data
 Group=www-data
+WorkingDirectory=/opt/authorization-stub
 ExecStart=/opt/authorization-stub/venv/bin/python /opt/authorization-stub/wsgi.py
 Environment="PYTHONUNBUFFERED=1"
 Environment="HOST=127.0.0.1"
