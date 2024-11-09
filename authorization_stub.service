@@ -1,0 +1,16 @@
+[Unit]
+Description=WSGI Service for Authorization-Stub
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+ExecStart=/opt/authorization-stub/venv/bin/python /opt/authorization-stub/wsgi.py
+Environment="PYTHONUNBUFFERED=1"
+Environment="HOST=127.0.0.1"
+Environment="PORT=5000"
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
