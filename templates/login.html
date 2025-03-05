@@ -6,7 +6,7 @@
     <title>Login</title>
     <style>
         body {
-            background-color: #121212;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: #ffffff;
             font-family: Arial, sans-serif;
             display: flex;
@@ -17,79 +17,146 @@
         }
 
         .login-container {
-            background-color: #1e1e1e;
+            background-color: rgba(30, 41, 59, 0.9);
             padding: 30px;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 400px;
             text-align: center;
         }
 
-        h2 {
-            margin-bottom: 40px;
-            font-size: 2em;
-            color: #bb86fc;
+        .title-wrapper {
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        input[type="text"], input[type="password"] {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #333;
-            border-radius: 5px;
-            background-color: #2c2c2c;
+        h2 {
+            font-size: 2em;
+            color: #ffffff;
+            cursor: pointer;
+            transition: opacity 0.5s ease-in-out;
+            margin: 0;
+        }
+
+        .input-group {
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 10px 12px 40px;
+            border: none;
+            border-radius: 8px;
+            background-color: #334155;
             color: #ffffff;
             font-size: 1em;
+            outline: none;
             box-sizing: border-box;
+        }
+
+        .input-group .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
         }
 
         button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-top: 20px;
-            background-color: #bb86fc;
+            background: linear-gradient(90deg, #0ea5e9, #22d3ee);
             color: #ffffff;
-            font-size: 1em;
+            font-size: 1.1em;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s ease;
             box-sizing: border-box;
         }
 
         button:hover {
-            background-color: #9f5fff;
+            background: linear-gradient(90deg, #0284c7, #06b6d4);
+        }
+
+        .flash-messages {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .flash-messages p {
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 1em;
+            margin: 5px 0;
+            text-align: center;
         }
 
         .error {
-            color: #ff4d4d;
-            margin-top: 15px;
-            font-size: 0.9em;
+            background-color: rgba(220, 38, 38, 0.2);
+            color: #f87171;
+            border: 1px solid #dc2626;
         }
+
+        .success {
+            background-color: #16a34a;
+            color: #ffffff;
+        }
+
     </style>
 </head>
 <body>
 <div class="login-container">
-    <h2>AMPHUB</h2>
+    <div class="title-wrapper">
+        <h2 id="welcome-text">Welcome</h2>
+    </div>
     <form action="/login" method="POST">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required><br>
+        <div class="input-group">
+            <span class="icon">&#128100;</span>
+            <input type="text" id="username" name="username" placeholder="Username" required>
+        </div>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required><br>
+        <div class="input-group">
+            <span class="icon">&#128274;</span>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
 
-        <button type="submit">Login</button>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
+        <button type="submit">Log In</button>
 
-        {% for category, message in messages %}
-        <p class="{{ category }}">{{ message }}</p>
-        {% endfor %}
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
 
-        {% endif %}
-        {% endwith %}
     </form>
 </div>
+
+<script>
+    const messages = ["Welcome", "Привет", "你好"];
+    let index = 0;
+    const welcomeText = document.getElementById("welcome-text");
+
+    function changeGreeting() {
+        welcomeText.style.opacity = 0;
+        setTimeout(() => {
+            index = (index + 1) % messages.length;
+            welcomeText.textContent = messages[index];
+            welcomeText.style.opacity = 1;
+        }, 500);
+    }
+
+    setInterval(changeGreeting, 3000);
+</script>
+
 </body>
 </html>
