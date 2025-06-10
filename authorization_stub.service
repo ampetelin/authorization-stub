@@ -7,7 +7,7 @@ Type=simple
 User=www-data
 Group=www-data
 WorkingDirectory=/opt/authorization-stub/authorization-stub
-ExecStart=/opt/authorization-stub/.venv/bin/waitress-serve --listen=127.0.0.1:8000 app:app
+ExecStart=/opt/authorization-stub/venv/bin/waitress-serve --listen=127.0.0.1:8000 app:app
 Environment="PYTHONUNBUFFERED=1"
 Restart=on-failure
 
