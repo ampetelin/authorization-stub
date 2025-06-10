@@ -29,12 +29,12 @@ sudo /opt/authorization-stub/venv/bin/pip install -r /opt/authorization-stub/req
 ```
 Создаем ссылку на службу
 ```shell
-sudo ln -s /opt/authorization-stub/authorization_stub.service /etc/systemd/system/
+sudo ln -s /opt/authorization-stub/authorization-stub.service /etc/systemd/system/
 ```
 Запускаем службу
 ```shell
-sudo systemctl start authorization_stub.service
-sudo systemctl enable authorization_stub.service
+sudo systemctl start authorization-stub.service
+sudo systemctl enable authorization-stub.service
 ```
 </details>
 
