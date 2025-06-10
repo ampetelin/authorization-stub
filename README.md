@@ -6,7 +6,7 @@
 <summary>Docker (recommended)</summary>
 
 ```shell
-docker run -d --name authorization-stub -p 8000:8000 ampetelin/authorization-stub:latest
+docker run -d --name authorization-stub -p 5000:5000 ampetelin/authorization-stub:latest
 ```
 
 </details>
