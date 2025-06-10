@@ -1,7 +1,12 @@
 FROM python:3.12-alpine
 
-WORKDIR /authorization-stub
-COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
+ENV PYTHONUNBUFFERED=1
 
-CMD ["python", "wsgi.py"]
+WORKDIR /authorization-stub
+
+COPY authorization-stub .
+
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt && rm /tmp/requirements.txt
+
+CMD ["waitress-serve", "--listen=0.0.0.0:8000", "app:app"]

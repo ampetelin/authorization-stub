@@ -1,6 +1,19 @@
 <h2 align="center">Authorization-Stub</h2>
 
-### Установка
+### Запуск
+
+<details>
+<summary>Docker (recommended)</summary>
+
+```shell
+docker run -d --name authorization-stub -p 8000:8000 ampetelin/authorization-stub:latest
+```
+
+</details>
+
+<details>
+
+<summary>systemd</summary>
 
 Клонируем репозиторий
 ```shell
@@ -23,3 +36,5 @@ sudo ln -s /opt/authorization-stub/authorization_stub.service /etc/systemd/syste
 sudo systemctl start authorization_stub.service
 sudo systemctl enable authorization_stub.service
 ```
+</details>
+
