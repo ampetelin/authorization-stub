@@ -6,11 +6,9 @@ After=network.target
 Type=simple
 User=www-data
 Group=www-data
-WorkingDirectory=/opt/authorization-stub
-ExecStart=/opt/authorization-stub/venv/bin/python /opt/authorization-stub/wsgi.py
+WorkingDirectory=/opt/authorization-stub/authorization-stub
+ExecStart=/opt/authorization-stub/venv/bin/waitress-serve --listen=127.0.0.1:5000 app:app
 Environment="PYTHONUNBUFFERED=1"
-Environment="HOST=127.0.0.1"
-Environment="PORT=5000"
 Restart=on-failure
 
 [Install]
