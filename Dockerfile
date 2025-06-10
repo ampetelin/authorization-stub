@@ -9,4 +9,4 @@ COPY authorization-stub .
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && rm /tmp/requirements.txt
 
-CMD ["waitress-serve", "--listen=0.0.0.0:8000", "app:app"]
+CMD ["waitress-serve", "--listen=0.0.0.0:5000", "app:app"]
